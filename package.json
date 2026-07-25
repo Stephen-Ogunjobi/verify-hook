@@ -1,0 +1,28 @@
+{
+  "name": "verify-hook",
+  "version": "1.0.0",
+  "description": "A reliable webhook processing API built with Express and TypeScript",
+  "main": "index.ts",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.1.1",
+    "@types/swagger-ui-express": "^4.1.8",
+    "tsx": "^4.23.1",
+    "typescript": "^7.0.2"
+  }
+}
