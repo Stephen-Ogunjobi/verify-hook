@@ -10,6 +10,6 @@ fs.mkdirSync(databaseDirectory, { recursive: true });
 
 export const database = new Database(databasePath);
 
-//WAL mode for better readd/write
+//WAL mode for better read/write
 database.pragma("journal_mode = WAL");
 database.pragma("foreign_keys = ON");
