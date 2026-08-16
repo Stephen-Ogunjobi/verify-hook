@@ -1,8 +1,9 @@
 import "dotenv/config";
 import app from "./app";
 import { initializeDatabase } from "./database/schema";
+import { env } from "./config/env";
 
-const port = Number(process.env.PORT) || 4000;
+const port = env.PORT;
 
 initializeDatabase();
 

@@ -1,8 +1,9 @@
 import Database from "better-sqlite3";
 import fs from "node:fs";
 import path from "node:path";
+import { env } from "../config/env";
 
-const databasePath = process.env.DATABASE_PATH || "./data/webhooks.db";
+const databasePath = env.DATABASE_PATH || "./data/webhooks.db";
 
 const databaseDirectory = path.dirname(databasePath);
 
