@@ -1,6 +1,10 @@
 import express from "express";
+import webhookRouter from "./routes/webhook.routes";
 
 const app = express();
+
+//webhook route must come before express.json to keep the raw body
+app.use("/webhooks", webhookRouter);
 
 app.use(express.json());
 
