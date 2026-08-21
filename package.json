@@ -2,7 +2,7 @@
   "name": "verify-hook",
   "version": "1.0.0",
   "description": "A reliable webhook processing API built with Express and TypeScript",
-  "main": "index.ts",
+  "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
