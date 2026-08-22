@@ -1,5 +1,6 @@
 import type { RequestHandler } from "express";
 import { webhookPayloadSchema } from "../schemas/webhook.schema";
+import { saveWebhookEvent } from "../repositories/webhook.repository";
 
 export const receiveWebhook: RequestHandler = (request, response) => {
   if (!Buffer.isBuffer(request.body)) {
@@ -35,11 +36,39 @@ export const receiveWebhook: RequestHandler = (request, response) => {
 
   const webhookId = request.get("X-Webhook-Id");
 
-  response.status(200).json({
-    message: "Webhook verified and validated",
+  if (!webhookId) {
+    response.status(400).json({
+      error: "Missing webhook ID",
+    });
+
+    return;
+  }
+
+  const savedEvent = saveWebhookEvent({
+    webhookId,
+    payload: validationResult.data,
+  });
+
+  if (!savedEvent.created) {
+    response.status(200).json({
+      message: "webhook was already received",
+      webhook: {
+        eventId: savedEvent.eventId,
+        id: webhookId,
+        duplicate: true,
+      },
+    });
+
+    return;
+  }
+
+  response.status(202).json({
+    message: "Webhook accepted for processing",
     webhook: {
+      eventId: savedEvent.eventId,
       id: webhookId,
       type: validationResult.data.type,
+      duplicate: false,
     },
   });
 };
