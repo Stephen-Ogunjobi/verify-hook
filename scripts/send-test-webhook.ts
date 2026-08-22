@@ -5,7 +5,9 @@ import { calculateWebhookSignature } from "../src/utils/webhook-signature";
 const webhookUrl = `http://localhost:${env.PORT}/webhooks`;
 
 async function sendTestWebhook(): Promise<void> {
-  const webhookId = randomUUID();
+  //proceess.argv is an array containing cli arg
+  //used the supplied id when testing dublicate or create a new one
+  const webhookId = process.argv[2] ?? randomUUID();
   const timestamp = Math.floor(Date.now() / 1000).toString();
 
   const payload = {

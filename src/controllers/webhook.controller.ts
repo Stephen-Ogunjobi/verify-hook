@@ -50,6 +50,7 @@ export const receiveWebhook: RequestHandler = (request, response) => {
   });
 
   if (!savedEvent.created) {
+    // acknoledge a repeated delivery without storing another event
     response.status(200).json({
       message: "webhook was already received",
       webhook: {
